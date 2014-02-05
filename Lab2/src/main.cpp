@@ -18,39 +18,42 @@ int main (int argc, char* argv[]) {
   if(argc == 1) {
     cout << "Please select a file." << endl;
   }
-  
-  //Open File
-  ifstream fileInput  (argv[1]);
-  
-  if(!fileInput.is_open()) {
-    cout << "Unable to open " << argv[1] << endl;
-  }
   else {
-    string word;
-    WordList wordList = wordList();
-    while(fileInput >> word) {
-      if( word[word.size()-1] == ',' ||
-          word[word.size()-1] == '!' ||
-          word[word.size()-1] == '.' ||
-          word[word.size()-1] == ';' ||
-          word[word.size()-1] == ':' ||
-          word[word.size()-1] == '?' ||
-          word[word.size()-1] == '-' ||
-          word[word.size()-1] == '+') 
-      {
-        word.erase(word.size()-1);
+      //Open File
+      ifstream fileInput  (argv[1]);
+      
+      if(!fileInput.is_open()) {
+        cout << "Unable to open " << argv[1] << endl;
       }
-      cout << word << endl;
-    }
-    
-    
-    // Close File
-    fileInput.close();
+      else {
+        cout << argv[1] << " opened." << endl;
+        string word;
+        WordList wordList;
+        while(fileInput >> word) {
+          if( word[word.size()-1] == ',' ||
+              word[word.size()-1] == '!' ||
+              word[word.size()-1] == '.' ||
+              word[word.size()-1] == ';' ||
+              word[word.size()-1] == ':' ||
+              word[word.size()-1] == '?' ||
+              word[word.size()-1] == '-' ||
+              word[word.size()-1] == '"' ||
+              word[word.size()-1] == '+') 
+          {
+            word.erase(word.size()-1);
+          }
+          wordList.addWord(word);
+          //cout << word << endl;
+            
+        }
+        
+        wordList.sortList();
+        wordList.printList();
+
+        // Close File
+        fileInput.close();
+      }
   }
-  
-  //For Each Line
-  //While Character is not space
-  
   
   return 0;
 }

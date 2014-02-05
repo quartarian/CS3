@@ -1,32 +1,16 @@
-# Makefile for Lab 7
-# CS 23021 Separate Files Lab
+CC=g++
+CFLAGS=-c -Wall
+LDFLAGS=
+SOURCES=inc/WordOccurrence.cpp inc/WordList.cpp src/main.cpp 
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=bin/lab2
 
-# Makefile "variables", occurrences of ${CXX} are replaced with g++
-CXX = g++
-CXXFLAGS = -Wall
+all: $(SOURCES) $(EXECUTABLE)
+		
+$(EXECUTABLE): $(OBJECTS) 
+		$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-#----------------------------------------------------------------------------
-# Link, make shapes executable
-
-#target: (tab) file_1_it_needs (space) file_2_it_needs  #called dependencies
-#(tab)  rule_to_make_dependencies
-lab2:	WordOccurrence.o WordList.o main.o
-	${CXX} ${CXXFLAGS} WordOccurrence.o WordList.o main.o -o bin/lab2
-
-# Compile Main
-main.o: src/main.cpp 
-	${CXX} ${CXXFLAGS} -c src/main.cpp
-
-# Compile WordOccurrence Class
-WordOccurrence.o:   inc/WordOccurrence.h inc/WordOccurrence.cpp
-	${CXX} ${CXXFLAGS} -c inc/WordOccurrence.cpp
-
-# Compile WordList Class
-WordList.o: inc/WordList.h inc/WordList.cpp 
-	${CXX} ${CXXFLAGS} -c inc/WordList.cpp
-
-#----------------------------------------------------------------------------
+.cpp.o:
+		$(CC) $(CFLAGS) $< -o $@
 clean:
-	rm -f lab2  # remove the executable avg file
-	rm -f *.o  # remove ALL object files in the directory
-
+		rm -rf *o $(EXECUTABLE)
