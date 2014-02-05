@@ -1,0 +1,32 @@
+# Makefile for Lab 7
+# CS 23021 Separate Files Lab
+
+# Makefile "variables", occurrences of ${CXX} are replaced with g++
+CXX = g++
+CXXFLAGS = -Wall
+
+#----------------------------------------------------------------------------
+# Link, make shapes executable
+
+#target: (tab) file_1_it_needs (space) file_2_it_needs  #called dependencies
+#(tab)  rule_to_make_dependencies
+lab2:	WordOccurrence.o WordList.o main.o
+	${CXX} ${CXXFLAGS} WordOccurrence.o WordList.o main.o -o lab2
+
+# Compile Main
+main.o: main.cpp 
+	${CXX} ${CXXFLAGS} -c main.cpp
+
+# Compile WordOccurrence Class
+WordOccurrence.o:   WordOccurrence.h WordOccurrence.cpp
+	$${CXX} ${CXXFLAGS} -c WordList.cpp
+
+# Compile WordList Class
+WordList.o: WordList.h WordList.cpp 
+	${CXX} ${CXXFLAGS} -c WordList.cpp
+
+#----------------------------------------------------------------------------
+clean:
+	rm -f lab2  # remove the executable avg file
+	rm -f *.o  # remove ALL object files in the directory
+
