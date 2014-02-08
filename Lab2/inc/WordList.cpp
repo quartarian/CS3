@@ -20,7 +20,11 @@ void WordList::addWord(const string & word) {
     }
     if(!isFound) {
     	WordOccurrence* newWordArray = new WordOccurrence[this->size_+1];
-    	memcpy( newWordArray, this->wordArray_, (this->size_) * sizeof(WordOccurrence) );
+        
+        for(int i=0;i < this->size_;i++) {
+            newWordArray[i] = this->wordArray_[i];
+        }
+        
         delete [] this->wordArray_;
 
     	this->wordArray_ = newWordArray;

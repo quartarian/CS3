@@ -13,4 +13,4 @@ $(EXECUTABLE): $(OBJECTS)
 .cpp.o:
 		$(CC) $(CFLAGS) $< -o $@
 clean:
-		rm -rf *o $(EXECUTABLE)
+		rm -rf *o inc/*.o src/*.o $(EXECUTABLE)
